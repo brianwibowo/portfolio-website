@@ -490,6 +490,10 @@ h1, h2, h3, h4 {
     background: linear-gradient(180deg, #ffffff 0 20%, #9fb4cc 20% 30%, #ffffff 30% 50%, #9fb4cc 50% 60%, #ffffff 60%);
 }
 
+.titlebar-icon.icon-error {
+    background: linear-gradient(180deg, #eb6b56, #b82918);
+}
+
 [data-theme="dark"] .titlebar-icon {
     background: var(--accent);
     border-radius: 0;
@@ -962,6 +966,16 @@ button.tb-btn:focus-visible {
     margin: 0;
     font-size: 14px;
     font-weight: bold;
+    color: var(--accent);
+}
+
+.metric-link {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.metric-link:hover {
     color: var(--accent);
 }
 
@@ -1793,6 +1807,67 @@ button.tb-btn:focus-visible {
     width: 1px;
     height: 1px;
     overflow: hidden;
+}
+
+/* Window 6: lover.exe (404 Not Found system alert dialog) */
+.popup > .window.window-lover {
+    width: min(470px, 100%);
+}
+
+.lover-body {
+    display: grid;
+    gap: 14px;
+}
+
+.lover-alert {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-items: start;
+    gap: 14px;
+}
+
+.lover-icon {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(1px 2px 1px rgba(0, 0, 0, 0.28));
+}
+
+.lover-copy h3 {
+    font-size: 1.08rem;
+    color: var(--accent);
+}
+
+.lover-copy p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--win-text);
+}
+
+.lover-copy code {
+    padding: 1px 5px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    font: 12.5px Consolas, 'Lucida Console', 'Courier New', monospace;
+}
+
+.lover-diag {
+    padding: 10px 12px;
+    background: var(--panel);
+    color: var(--muted);
+    border: 1px solid var(--panel-border);
+    font: 12.5px/1.5 Consolas, 'Lucida Console', 'Courier New', monospace;
+}
+
+[data-theme="dark"] .lover-diag {
+    box-shadow: inset 1px 1px 0 var(--bevel-lo);
+}
+
+.lover-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
 .copyright {
@@ -2854,7 +2929,7 @@ button.tb-btn:focus-visible {
         justify-self: stretch;
         grid-auto-flow: row;
         grid-template-rows: none;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(74px, 1fr));
         grid-auto-columns: auto;
         gap: 6px;
         padding: 8px 0 0;
@@ -3024,7 +3099,7 @@ button.tb-btn:focus-visible {
 @media (max-height: 520px) and (min-width: 601px) {
     .desktop-icons {
         --cell: 58px;
-        grid-template-rows: repeat(auto-fill, min(var(--cell), calc((100dvh - var(--taskbar-h) - 8px) / 6)));
+        grid-template-rows: repeat(auto-fill, min(var(--cell), calc((100dvh - var(--taskbar-h) - 8px) / 7)));
     }
 
     .desk-icon {

@@ -18,7 +18,7 @@
             document.documentElement.dataset.theme = families[skin];
         })();
     </script>
-    <link rel="stylesheet" href="css/style.css?v=20261124b">
+    <link rel="stylesheet" href="css/style.css?v=20261124c">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 </head>
@@ -96,6 +96,15 @@
                     </svg>
                     <span>Contact</span>
                 </a>
+                <a class="desk-icon" href="#lover">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="5" y="8" width="38" height="32" rx="2" fill="#fdfdfd" stroke="#6b7b8c" stroke-width="2"/>
+                        <rect x="6" y="9" width="36" height="7" fill="#c0392b"/>
+                        <path d="M24 35l-8.2-7.8a5.2 5.2 0 0 1 7.3-7.4L24 20.8l.9-1a5.2 5.2 0 0 1 7.3 7.4L24 35z" fill="#e74c3c" stroke="#922b21" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M24 20l-2 4.5 3.5 2-2 5.5" fill="none" stroke="#fdfdfd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>lover.exe</span>
+                </a>
             </nav>
 
             <article class="window window-welcome pending" id="welcome" aria-labelledby="welcome-title">
@@ -124,6 +133,10 @@
                         <div class="metric-item">
                             <dt>National Competitions</dt>
                             <dd>20+ awards</dd>
+                        </div>
+                        <div class="metric-item">
+                            <dt>Lover</dt>
+                            <dd><a href="#lover" class="metric-link">404 Not Found</a></dd>
                         </div>
                     </dl>
                     <div class="hero-cta">
@@ -534,7 +547,7 @@
                         <div class="notepad-header">
                             <p class="mono-title">BRIAN WIBOWO (APRIANSYAH WIBOWO)</p>
                             <p class="mono-sub">Full-Stack Software Developer | South Jakarta, Jakarta | sultanapri86@gmail.com</p>
-                            <p class="mono-sub">GitHub: https://github.com/brianwibowo</p>
+                            <p class="mono-sub">GitHub: https://github.com/brianwibowo | Lover: 404 Not Found</p>
                         </div>
 
                         <div class="skill-groups" id="skill-groups">
@@ -633,6 +646,41 @@
             </article>
         </section>
 
+        <section id="lover" class="section" hidden>
+            <article class="window window-lover" role="dialog" aria-labelledby="lover-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon icon-error" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="lover-title">lover.exe: 404 Not Found</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="window-body lover-body">
+                    <div class="lover-alert">
+                        <svg class="lover-icon" viewBox="0 0 48 48" aria-hidden="true">
+                            <circle cx="24" cy="24" r="20" fill="#c0392b" stroke="#7f1d1d" stroke-width="2"/>
+                            <path d="M24 34.5l-8.5-8a5.4 5.4 0 0 1 7.6-7.6l.9 1 .9-1a5.4 5.4 0 0 1 7.6 7.6l-8.5 8z" fill="#ffffff"/>
+                            <path d="M24.2 19.5l-2.2 4.8 3.6 2-2.2 5.8" fill="none" stroke="#c0392b" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <div class="lover-copy">
+                            <h3>HTTP 404: Lover Not Found</h3>
+                            <p>Windows cannot find <code>C:\Life\lover.exe</code>. Make sure the person exists in this timeline, or click <strong>Retry Scan</strong> to search again.</p>
+                        </div>
+                    </div>
+                    <div class="lover-diag" id="lover-log" role="status" aria-live="polite">Diagnostic: 0 active instances found. All system resources are currently busy shipping production code and maintaining servers.</div>
+                    <div class="lover-actions">
+                        <button type="button" class="btn" id="lover-retry">Retry Scan</button>
+                        <a href="#contact" class="btn">Send a Message</a>
+                        <button type="button" class="btn btn-primary" data-win="close">OK</button>
+                    </div>
+                </div>
+                <footer class="statusbar">
+                    <span id="lover-status">Status: 404 Not Found</span>
+                    <span>ERR_NO_PARTNER</span>
+                </footer>
+            </article>
+        </section>
+
         <p class="copyright">&copy; <span id="year"></span> Brian Wibowo · South Jakarta, Indonesia</p>
     </main>
 
@@ -656,6 +704,7 @@
                     <li><a href="#education">Education &amp; Leadership</a></li>
                     <li><a href="#readme">Technical Skills</a></li>
                     <li><a href="#contact">New Message</a></li>
+                    <li><a href="#lover">lover.exe (404)</a></li>
                     <li class="sep" role="separator"></li>
                     <li><a href="https://github.com/brianwibowo" target="_blank" rel="noopener noreferrer">GitHub (@brianwibowo)</a></li>
                     <li><a href="mailto:sultanapri86@gmail.com">Email sultanapri86@gmail.com</a></li>
@@ -670,6 +719,7 @@
             <li id="task-education" hidden><a href="#education">Education</a></li>
             <li id="task-readme" hidden><a href="#readme">skills.txt</a></li>
             <li id="task-contact" hidden><a href="#contact" data-task="contact">New Message</a></li>
+            <li id="task-lover" hidden><a href="#lover">lover.exe</a></li>
         </ul>
 
         <div class="tray">
@@ -698,9 +748,9 @@
         </div>
     </nav>
 
-    <script src="js/sound.js?v=20261124b"></script>
-    <script src="js/main.js?v=20261124b"></script>
-    <script src="js/contact.js?v=20261124b"></script>
-    <script src="js/droid.js?v=20261124b"></script>
+    <script src="js/sound.js?v=20261124c"></script>
+    <script src="js/main.js?v=20261124c"></script>
+    <script src="js/contact.js?v=20261124c"></script>
+    <script src="js/droid.js?v=20261124c"></script>
 </body>
 </html>

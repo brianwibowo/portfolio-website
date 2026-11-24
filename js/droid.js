@@ -386,6 +386,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window.systemSound?.beep(420, 4);
     });
 
+    document.addEventListener('lover404', () => {
+        el.classList.remove('asleep');
+        if (mode === 'sleep') lookAround(800);
+        say('404? same here.', 2000);
+    });
+
     window.addEventListener('resize', () => {
         if (!surface && mode !== 'carried') y = ground();
     });

@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        win.querySelector('[data-win="close"]')?.addEventListener('click', close);
+        win.querySelectorAll('[data-win="close"]').forEach((btn) => btn.addEventListener('click', close));
         win.querySelector('[data-win="minimize"]')?.addEventListener('click', minimize);
 
         return { win, taskLink, isOpen, open, minimize, close };
@@ -245,6 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'education' },
         { id: 'readme' },
         { id: 'contact', focusFirst: true },
+        { id: 'lover' },
     ];
 
     const taskbarH = () => document.querySelector('.taskbar')?.offsetHeight || 44;
@@ -605,6 +606,39 @@ document.addEventListener('DOMContentLoaded', () => {
     skillSearch?.addEventListener('input', filterSkills);
     skillClear?.addEventListener('click', resetSkills);
     skillReset?.addEventListener('click', resetSkills);
+
+    // Interactive diagnostic retry for lover.exe (404 Not Found dialog).
+    const loverWin = document.querySelector('#lover .window');
+    const loverRetry = document.getElementById('lover-retry');
+    const loverLog = document.getElementById('lover-log');
+    const loverStatus = document.getElementById('lover-status');
+    const LOVER_LOGS = [
+        'Scan complete: HTTP 404 persists. Only Docker containers responded on localhost.',
+        'Connection timed out: port 443 is open, heart port remains closed.',
+        'Query returned 0 matches. Redirecting CPU cycles back to shipping features.',
+        'Still 404 Not Found. Try reaching out via Send a Message instead.',
+    ];
+    let loverTries = 0;
+
+    loverWin?.addEventListener('winopen', () => {
+        window.systemSound?.beep(320, 2);
+        document.dispatchEvent(new CustomEvent('lover404'));
+    });
+
+    loverRetry?.addEventListener('click', () => {
+        loverRetry.disabled = true;
+        loverRetry.textContent = 'Scanning...';
+        if (loverStatus) loverStatus.textContent = 'Scanning local timeline...';
+        setTimeout(() => {
+            const msg = LOVER_LOGS[loverTries % LOVER_LOGS.length];
+            loverTries++;
+            if (loverLog) loverLog.textContent = `[Attempt #${loverTries}] ${msg}`;
+            if (loverStatus) loverStatus.textContent = `Status: 404 Not Found (attempt ${loverTries})`;
+            loverRetry.disabled = false;
+            loverRetry.textContent = 'Retry Scan';
+            window.systemSound?.beep(280, 2);
+        }, 320);
+    });
 
     // Launch Welcome window with zoom animation from its desktop shortcut.
     const welcomeIcon = document.querySelector('.desk-icon[href="#welcome"]');
