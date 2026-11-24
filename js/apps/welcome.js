@@ -31,26 +31,6 @@ export const welcomeApp = {
                         <h1 class="hero-name">Brian Wibowo</h1>
                         <p class="hero-tagline">Full-Stack Developer</p>
                         <p class="hero-lede">Informatics Engineering graduate (GPA 3.88/4.00) with 2 years of professional experience building end-to-end web, mobile, and desktop applications. Shipped 60+ production software solutions across government, academic, and private-sector clients using Laravel, Next.js, Go, and Docker.</p>
-                        <dl class="hero-metrics" aria-label="Career highlights">
-                            <div class="metric-item">
-                                <dt>Production Systems</dt>
-                                <dd>60+ shipped</dd>
-                            </div>
-                            <div class="metric-item">
-                                <dt>UNNES Informatics GPA</dt>
-                                <dd>3.88 / 4.00</dd>
-                            </div>
-                            <div class="metric-item">
-                                <dt>National Competitions</dt>
-                                <dd>20+ awards</dd>
-                            </div>
-                        </dl>
-                        <div class="hero-cta">
-                            <a href="#projects" class="btn btn-primary">Open Projects</a>
-                            <a href="#experience" class="btn">View Work History</a>
-                            <a href="#education" class="btn">Academic &amp; Leadership</a>
-                            <a href="#contact" class="btn">Send a Message</a>
-                        </div>
                     </div>
                     <figure class="hero-portrait" id="hero-portrait">
                         <div class="pixel-screen">
@@ -61,6 +41,27 @@ export const welcomeApp = {
                             <button type="button" class="pixel-mode-btn" id="portrait-mode-btn" aria-pressed="false" title="Toggle retro LCD tint">LCD</button>
                         </figcaption>
                     </figure>
+                    <dl class="hero-metrics" aria-label="Career highlights">
+                        <div class="metric-item">
+                            <dt>Production Systems</dt>
+                            <dd>60+ shipped</dd>
+                        </div>
+                        <div class="metric-item">
+                            <dt>UNNES Informatics GPA</dt>
+                            <dd>3.88 / 4.00</dd>
+                        </div>
+                        <div class="metric-item">
+                            <dt>National Competitions</dt>
+                            <dd>20+ awards</dd>
+                        </div>
+                    </dl>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary">Open Projects</a>
+                        <a href="#experience" class="btn">View Work History</a>
+                        <a href="#education" class="btn">Academic &amp; Leadership</a>
+                        <a href="#contact" class="btn">Send a Message</a>
+                        <a href="https://github.com/brianwibowo" class="btn" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
                 </div>
             </div>
             <footer class="statusbar">

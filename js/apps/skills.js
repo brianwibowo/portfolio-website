@@ -34,7 +34,7 @@ export const skillsApp = {
                         <div class="notepad-header">
                             <p class="mono-title">BRIAN WIBOWO (APRIANSYAH WIBOWO)</p>
                             <p class="mono-sub">Full-Stack Software Developer | South Jakarta, Jakarta | sultanapri86@gmail.com</p>
-                            <p class="mono-sub">GitHub: https://github.com/brianwibowo</p>
+                            <p class="mono-sub">GitHub: <a href="https://github.com/brianwibowo" target="_blank" rel="noopener noreferrer">https://github.com/brianwibowo</a></p>
                         </div>
 
                         <div class="skill-groups" id="skill-groups">

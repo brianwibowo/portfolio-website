@@ -46,12 +46,17 @@
 .hero-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: clamp(20px, 3.2vw, 40px);
+    align-items: start;
+    gap: 18px clamp(20px, 3.2vw, 40px);
 }
 
 .hero-main {
     min-width: 0;
+}
+
+.hero-metrics,
+.hero-cta {
+    grid-column: 1 / -1;
 }
 
 .hero-portrait {
@@ -204,7 +209,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px 16px;
-    margin: 20px 0 0;
+    margin: 4px 0 0;
     padding: 10px 14px;
     max-width: fit-content;
     background: var(--panel);
@@ -225,7 +230,7 @@
 .metric-item dt { font-size: 12px; color: var(--muted); }
 .metric-item dd { margin: 0; font-size: 14px; font-weight: bold; color: var(--accent); }
 
-.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2px; }
 
 /* experience.exe (master-detail split pane) */
 .popup > .window.window-experience { width: min(880px, 100%); height: min(560px, 100%); }
