@@ -25,29 +25,42 @@ export const welcomeApp = {
             </header>
             <div class="window-body hero-body">
                 <pre class="ascii-aura" id="ascii-aura" aria-hidden="true"></pre>
-                <p class="greeting" id="greeting">Hello.</p>
-                <h1 class="hero-name">Brian Wibowo</h1>
-                <p class="hero-tagline">Full-Stack Developer</p>
-                <p class="hero-lede">Informatics Engineering graduate (GPA 3.88/4.00) with 2 years of professional experience building end-to-end web, mobile, and desktop applications. Shipped 60+ production software solutions across government, academic, and private-sector clients using Laravel, Next.js, Go, and Docker.</p>
-                <dl class="hero-metrics" aria-label="Career highlights">
-                    <div class="metric-item">
-                        <dt>Production Systems</dt>
-                        <dd>60+ shipped</dd>
+                <div class="hero-layout">
+                    <div class="hero-main">
+                        <p class="greeting" id="greeting">Hello.</p>
+                        <h1 class="hero-name">Brian Wibowo</h1>
+                        <p class="hero-tagline">Full-Stack Developer</p>
+                        <p class="hero-lede">Informatics Engineering graduate (GPA 3.88/4.00) with 2 years of professional experience building end-to-end web, mobile, and desktop applications. Shipped 60+ production software solutions across government, academic, and private-sector clients using Laravel, Next.js, Go, and Docker.</p>
+                        <dl class="hero-metrics" aria-label="Career highlights">
+                            <div class="metric-item">
+                                <dt>Production Systems</dt>
+                                <dd>60+ shipped</dd>
+                            </div>
+                            <div class="metric-item">
+                                <dt>UNNES Informatics GPA</dt>
+                                <dd>3.88 / 4.00</dd>
+                            </div>
+                            <div class="metric-item">
+                                <dt>National Competitions</dt>
+                                <dd>20+ awards</dd>
+                            </div>
+                        </dl>
+                        <div class="hero-cta">
+                            <a href="#projects" class="btn btn-primary">Open Projects</a>
+                            <a href="#experience" class="btn">View Work History</a>
+                            <a href="#education" class="btn">Academic &amp; Leadership</a>
+                            <a href="#contact" class="btn">Send a Message</a>
+                        </div>
                     </div>
-                    <div class="metric-item">
-                        <dt>UNNES Informatics GPA</dt>
-                        <dd>3.88 / 4.00</dd>
-                    </div>
-                    <div class="metric-item">
-                        <dt>National Competitions</dt>
-                        <dd>20+ awards</dd>
-                    </div>
-                </dl>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">Open Projects</a>
-                    <a href="#experience" class="btn">View Work History</a>
-                    <a href="#education" class="btn">Academic &amp; Leadership</a>
-                    <a href="#contact" class="btn">Send a Message</a>
+                    <figure class="hero-portrait" id="hero-portrait">
+                        <div class="pixel-screen">
+                            <img src="assets/images/portrait-pixel.png" width="320" height="384" alt="Retro pixel art portrait of Brian Wibowo" class="pixel-photo">
+                        </div>
+                        <figcaption class="pixel-caption">
+                            <span>brian.bmp · 80x96</span>
+                            <button type="button" class="pixel-mode-btn" id="portrait-mode-btn" aria-pressed="false" title="Toggle retro LCD tint">LCD</button>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
             <footer class="statusbar">
@@ -63,6 +76,14 @@ export const welcomeApp = {
             const hour = new Date().getHours();
             greeting.textContent = hour < 12 ? 'Good morning.' : hour < 18 ? 'Good afternoon.' : 'Good evening.';
         }
+
+        const portrait = document.getElementById('hero-portrait');
+        const modeBtn = document.getElementById('portrait-mode-btn');
+        modeBtn?.addEventListener('click', () => {
+            const isLcd = portrait?.classList.toggle('is-lcd');
+            modeBtn.setAttribute('aria-pressed', String(Boolean(isLcd)));
+            modeBtn.textContent = isLcd ? 'Color' : 'LCD';
+        });
 
         const welcomeWin = document.getElementById('welcome');
         const aura = document.getElementById('ascii-aura');
