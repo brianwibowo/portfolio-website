@@ -639,12 +639,12 @@
 
 .logon-name {
     margin: 0;
-    font: bold 1.55rem / 1.1 var(--font-title);
+    font: bold clamp(1.15rem, 4vw, 1.55rem) / 1.15 var(--font-title);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--icon-text);
     text-shadow: var(--icon-shadow, none);
-    white-space: nowrap;
+    overflow-wrap: break-word;
 }
 
 .logon-role {
@@ -690,8 +690,12 @@
 
 /* Responsive desktop shell and touch targets */
 @media (max-width: 900px) {
+    .desktop {
+        padding: 14px max(14px, env(safe-area-inset-right, 0px)) 10px calc(76px + 12px + env(safe-area-inset-left, 0px));
+    }
+
     .task-buttons a {
-        width: 118px;
+        width: 112px;
         padding: 0 8px;
     }
 }
@@ -741,8 +745,9 @@
 @media (max-width: 760px) {
     .hero {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
         min-height: 0;
+        align-items: start;
     }
 
     .task-buttons { display: none; }
@@ -751,34 +756,44 @@
 
 @media (max-width: 600px) {
     .desktop {
-        padding: 0 max(10px, env(safe-area-inset-right, 0px)) 12px max(10px, env(safe-area-inset-left, 0px));
+        padding: 6px max(10px, env(safe-area-inset-right, 0px)) 14px max(10px, env(safe-area-inset-left, 0px));
     }
 
-    .hero { grid-template-rows: auto 1fr; gap: 8px; }
+    .hero {
+        grid-template-rows: auto auto;
+        gap: 10px;
+    }
 
     .desktop-icons {
         position: static;
         justify-self: stretch;
-        grid-auto-flow: row;
-        grid-template-rows: none;
-        grid-template-columns: repeat(auto-fit, minmax(74px, 1fr));
-        grid-auto-columns: auto;
-        gap: 6px;
-        padding: 8px 0 0;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 4px;
+        padding: 4px 2px 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        pointer-events: auto;
+    }
+
+    .desktop-icons::-webkit-scrollbar {
+        display: none;
     }
 
     .desk-icon {
-        width: auto;
+        flex: 0 0 68px;
+        width: 68px;
         height: auto;
-        min-height: 58px;
-        padding: 6px 4px;
+        min-height: 60px;
+        padding: 6px 2px;
         font-size: 11px;
     }
 
     .desk-icon svg { width: 32px; height: 32px; }
-    .window-body { padding: 18px 16px; }
+    .window-body { padding: 16px 14px; }
     .titlebar-buttons .tb-max { display: none; }
-    .section.popup { padding: 6px; }
+    .section.popup { padding: 8px; }
 
     .start-menu { width: min(280px, calc(100vw - 16px)); }
 
@@ -816,15 +831,23 @@
     .logon-btn { width: min(210px, 74vw); margin-top: 30px; }
 }
 
-@media (max-height: 520px) and (min-width: 601px) {
+@media (max-height: 640px) and (min-width: 601px) {
     .desktop-icons {
-        --cell: 58px;
-        grid-template-rows: repeat(auto-fill, min(var(--cell), calc((100dvh - var(--taskbar-h) - 8px) / 7)));
+        --cell: min(70px, calc((100dvh - var(--taskbar-h) - 16px) / 7));
+        grid-template-rows: repeat(auto-fill, var(--cell));
     }
 
-    .desk-icon { height: auto; gap: 1px; padding-top: 2px; font-size: 10px; }
-    .desk-icon svg { width: 26px; height: 26px; }
-    .desktop { padding-left: calc(58px + 14px + env(safe-area-inset-left, 0px)); }
+    .desk-icon { height: var(--cell); gap: 1px; padding-top: 2px; font-size: 10px; }
+    .desk-icon svg { width: 28px; height: 28px; }
+    .desktop { padding-top: 10px; padding-left: calc(var(--cell, 68px) + 16px + env(safe-area-inset-left, 0px)); }
+}
+
+@media (max-height: 520px) and (min-width: 601px) {
+    .desktop-icons {
+        --cell: min(56px, calc((100dvh - var(--taskbar-h) - 10px) / 7));
+    }
+
+    .desk-icon svg { width: 24px; height: 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
