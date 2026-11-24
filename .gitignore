@@ -1,0 +1,7 @@
+.idea/
+.vscode/
+.DS_Store
+node_modules/
+.env
+*.log
+cv_apriansyah_wibowo.md

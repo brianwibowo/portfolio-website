@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-skin="noir">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Brian Wibowo | Full-Stack Developer</title>
+    <meta name="description" content="Portfolio of Brian Wibowo (Apriansyah Wibowo), Full-Stack Developer based in South Jakarta with 60+ shipped software systems across government, academic, and private sectors.">
+    <script>
+        document.documentElement.classList.add('js');
+        (function () {
+            var families = { olive: 'dark', noir: 'dark', cyber: 'dark', luna: 'light', silver: 'light', aero: 'light' };
+            var skin = 'noir';
+            try {
+                var saved = localStorage.getItem('skin');
+                if (families[saved]) skin = saved;
+            } catch (e) { /* localStorage unavailable */ }
+            document.documentElement.dataset.skin = skin;
+            document.documentElement.dataset.theme = families[skin];
+        })();
+    </script>
+    <link rel="stylesheet" href="css/style.css?v=20261124b">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+</head>
+<body>
+    <div class="logon" id="logon" role="dialog" aria-modal="true" aria-label="Log on">
+        <div class="logon-main">
+            <div class="logon-card">
+                <div class="lg-id">
+                    <span class="logon-glyph" aria-hidden="true">
+                        <pre class="logon-wolf" id="logon-wolf"></pre>
+                    </span>
+                    <div>
+                        <p class="logon-name"><span class="visually-hidden">Brian Wibowo</span><span id="logon-name" aria-hidden="true">Brian Wibowo</span></p>
+                        <p class="logon-role">Full-Stack Developer</p>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary logon-btn" id="logon-user" aria-label="Enter desktop as Brian Wibowo">
+                    <span id="logon-btn-text">Enter Desktop</span>
+                </button>
+            </div>
+        </div>
+        <span class="visually-hidden" id="logon-status" aria-live="polite"></span>
+    </div>
+
+    <main class="desktop">
+        <section id="home" class="hero">
+            <nav class="desktop-icons" aria-label="Desktop shortcuts">
+                <a class="desk-icon" href="#welcome">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="5" y="8" width="38" height="32" rx="2" fill="#fdfdfd" stroke="#6b7b8c" stroke-width="2"/>
+                        <rect x="6" y="9" width="36" height="7" fill="#4f86d9"/>
+                        <rect x="35" y="10.5" width="5" height="4" rx="1" fill="#e8805e"/>
+                        <path d="M12 23h16M12 29h22M12 35h12" stroke="#9aa6b2" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                    <span>welcome.exe</span>
+                </a>
+                <a class="desk-icon" href="#experience">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="6" y="14" width="36" height="26" rx="3" fill="#8b5e34" stroke="#4f3319" stroke-width="2"/>
+                        <path d="M18 14v-4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4" fill="none" stroke="#4f3319" stroke-width="2.5"/>
+                        <path d="M6 25h36" stroke="#4f3319" stroke-width="2"/>
+                        <rect x="21" y="22" width="6" height="6" rx="1" fill="#f6c94c" stroke="#4f3319" stroke-width="1.5"/>
+                    </svg>
+                    <span>Experience</span>
+                </a>
+                <a class="desk-icon" href="#projects">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M4 12a2 2 0 0 1 2-2h12l4 4h20a2 2 0 0 1 2 2v4H4z" fill="#e0a92e" stroke="#9a6d10" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M4 18h40v20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#f6c94c" stroke="#9a6d10" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M6 20.5h36" stroke="#fde59a" stroke-width="2"/>
+                    </svg>
+                    <span>Projects</span>
+                </a>
+                <a class="desk-icon" href="#education">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M24 8L4 18l20 10 20-10-20-10z" fill="#3a6fd8" stroke="#1d3b7a" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M12 22v11c0 3.5 5.4 6 12 6s12-2.5 12-6V22" fill="#5d94ec" stroke="#1d3b7a" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M42 19v13" stroke="#f6c94c" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="42" cy="33" r="2.5" fill="#f6c94c"/>
+                    </svg>
+                    <span>Education</span>
+                </a>
+                <a class="desk-icon" href="#readme">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <path d="M10 4h20l8 8v32H10z" fill="#fdfdfd" stroke="#6b7b8c" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M30 4v8h8" fill="#e3e7ec" stroke="#6b7b8c" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M15 19h18M15 24h18M15 29h18M15 34h12" stroke="#7d8a99" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span>skills.txt</span>
+                </a>
+                <a class="desk-icon" href="#contact">
+                    <svg viewBox="0 0 48 48" aria-hidden="true">
+                        <rect x="5" y="11" width="38" height="26" rx="2" fill="#fdfdfd" stroke="#6b7b8c" stroke-width="2"/>
+                        <path d="M6 13l18 13 18-13" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+                    </svg>
+                    <span>Contact</span>
+                </a>
+            </nav>
+
+            <article class="window window-welcome pending" id="welcome" aria-labelledby="welcome-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="welcome-title">Welcome</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="window-body hero-body">
+                    <pre class="ascii-aura" id="ascii-aura" aria-hidden="true"></pre>
+                    <p class="greeting" id="greeting">Hello.</p>
+                    <h1 class="hero-name">Brian Wibowo</h1>
+                    <p class="hero-tagline">Full-Stack Developer</p>
+                    <p class="hero-lede">Informatics Engineering graduate (GPA 3.88/4.00) with 2 years of professional experience building end-to-end web, mobile, and desktop applications. Shipped 60+ production software solutions across government, academic, and private-sector clients using Laravel, Next.js, Go, and Docker.</p>
+                    <dl class="hero-metrics" aria-label="Career highlights">
+                        <div class="metric-item">
+                            <dt>Production Systems</dt>
+                            <dd>60+ shipped</dd>
+                        </div>
+                        <div class="metric-item">
+                            <dt>UNNES Informatics GPA</dt>
+                            <dd>3.88 / 4.00</dd>
+                        </div>
+                        <div class="metric-item">
+                            <dt>National Competitions</dt>
+                            <dd>20+ awards</dd>
+                        </div>
+                    </dl>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-primary">Open Projects</a>
+                        <a href="#experience" class="btn">View Work History</a>
+                        <a href="#education" class="btn">Academic &amp; Leadership</a>
+                        <a href="#contact" class="btn">Send a Message</a>
+                    </div>
+                </div>
+                <footer class="statusbar">
+                    <span>Apriansyah Wibowo (Brian)</span>
+                    <span>South Jakarta, Indonesia</span>
+                </footer>
+            </article>
+        </section>
+
+        <section id="experience" class="section" hidden>
+            <article class="window window-experience" role="dialog" aria-labelledby="experience-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon icon-folder" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="experience-title">experience.exe: Work History</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="address-bar">
+                    <span class="address-label">Location</span>
+                    <span class="address-path">C:\Career\Working_Experience (3 roles)</span>
+                </div>
+                <div class="window-body exp-body">
+                    <div class="exp-split">
+                        <div class="exp-sidebar" role="tablist" aria-label="Employers" aria-orientation="vertical">
+                            <button type="button" class="exp-tab" role="tab" id="tab-exp-icloud" aria-selected="true" aria-controls="panel-exp-icloud" data-exp-status="PT Indonesian Cloud | Sep 2026 to Present">
+                                <span class="exp-tab-company">PT Indonesian Cloud</span>
+                                <span class="exp-tab-meta">Full-Stack Intern · Sep 2026 - Present</span>
+                            </button>
+                            <button type="button" class="exp-tab" role="tab" id="tab-exp-vuriko" aria-selected="false" aria-controls="panel-exp-vuriko" tabindex="-1" data-exp-status="Vuriko Studio | Sep 2024 to Present">
+                                <span class="exp-tab-company">Vuriko Studio</span>
+                                <span class="exp-tab-meta">Founder &amp; Full-Stack · Sep 2024 - Present</span>
+                            </button>
+                            <button type="button" class="exp-tab" role="tab" id="tab-exp-pucung" aria-selected="false" aria-controls="panel-exp-pucung" tabindex="-1" data-exp-status="Bapak Pucung Studio | Dec 2025 to Present">
+                                <span class="exp-tab-company">Bapak Pucung Studio</span>
+                                <span class="exp-tab-meta">Full-Stack Developer · Dec 2025 - Present</span>
+                            </button>
+                        </div>
+
+                        <div class="exp-detail-wrap">
+                            <div class="exp-panel" role="tabpanel" id="panel-exp-icloud" aria-labelledby="tab-exp-icloud" tabindex="0">
+                                <div class="exp-head">
+                                    <div>
+                                        <h3>PT Indonesian Cloud</h3>
+                                        <p class="exp-role">Full-Stack Developer Intern</p>
+                                    </div>
+                                    <div class="exp-place">
+                                        <span>DKI Jakarta</span>
+                                        <span>Sep 2026 - Present</span>
+                                    </div>
+                                </div>
+                                <ul class="exp-points">
+                                    <li>Developed <strong>Farmer App</strong>, an agricultural land management SaaS platform with a multimodal assistant supporting text, image, and audio input. Integrated retrieval-augmented generation (RAG), a vector database, and the OpenRouter API to ground responses in domain knowledge.</li>
+                                    <li>Automated procurement data collection and prospect analysis through a sales intelligence platform (<strong>SALEP</strong>) combining SPSE scraping with LLM social media analysis. Applied data labeling, preprocessing, and guardrails to score relevance and rank sales leads with confidence scores.</li>
+                                    <li>Customized Indonesian Cloud's <strong>OpenStack dashboard</strong> into a customer-facing portal for server and virtual machine management, adapting cloud infrastructure controls into an integrated customer web portal.</li>
+                                </ul>
+                                <ul class="tags" aria-label="Technologies used at PT Indonesian Cloud">
+                                    <li>RAG &amp; Vector DB</li>
+                                    <li>OpenRouter API</li>
+                                    <li>OpenStack</li>
+                                    <li>SPSE Scraping</li>
+                                    <li>LLM Guardrails</li>
+                                </ul>
+                            </div>
+
+                            <div class="exp-panel" role="tabpanel" id="panel-exp-vuriko" aria-labelledby="tab-exp-vuriko" tabindex="0" hidden>
+                                <div class="exp-head">
+                                    <div>
+                                        <h3>Vuriko Studio</h3>
+                                        <p class="exp-role">Founder &amp; Full-Stack Developer</p>
+                                    </div>
+                                    <div class="exp-place">
+                                        <span>Semarang</span>
+                                        <span>Sep 2024 - Present</span>
+                                    </div>
+                                </div>
+                                <ul class="exp-points">
+                                    <li>Delivered <strong>45+ digital solutions for 30+ government, academic, and private-sector clients</strong> by gathering stakeholder requirements, analyzing business processes, defining product scope, and coordinating sprints in ClickUp under Scrum and Waterfall workflows.</li>
+                                    <li>Built <strong>MindFit</strong>, a Laravel health assessment platform connected to a diagnostic engine via n8n webhooks, combining computed health metrics (BMR, TDEE, BMI) with LLM analysis to produce personalized health assessments, nutrition guidance, and fitness plans.</li>
+                                    <li>Developed <strong>SI-Mliwis</strong> with Next.js and Supabase, turning operational requirements at Pantai Mliwis into integrated workflows for incoming and outgoing correspondence, digital document archiving, revenue reporting, and analytics dashboards.</li>
+                                </ul>
+                                <ul class="tags" aria-label="Technologies used at Vuriko Studio">
+                                    <li>Laravel</li>
+                                    <li>Next.js</li>
+                                    <li>Supabase</li>
+                                    <li>n8n Webhooks</li>
+                                    <li>Scrum &amp; ClickUp</li>
+                                </ul>
+                            </div>
+
+                            <div class="exp-panel" role="tabpanel" id="panel-exp-pucung" aria-labelledby="tab-exp-pucung" tabindex="0" hidden>
+                                <div class="exp-head">
+                                    <div>
+                                        <h3>Bapak Pucung Studio</h3>
+                                        <p class="exp-role">Full-Stack Developer</p>
+                                    </div>
+                                    <div class="exp-place">
+                                        <span>Semarang</span>
+                                        <span>Dec 2025 - Present</span>
+                                    </div>
+                                </div>
+                                <ul class="exp-points">
+                                    <li>Developed <strong>15+ production digital products</strong> spanning information systems, marketplaces, browser games, and desktop applications across full-stack architectures and deployment pipelines.</li>
+                                    <li>Digitized waste deposit and reward management for <strong>Funbumi's IoT recycling system</strong> deployed around UNJ Jakarta by building Laravel web workflows and API integrations, enabling residents to sort physical waste across 4 categories, log deposits, track contributions, and redeem rewards.</li>
+                                    <li>Built <strong>Wayang Playverse</strong>, an Electron.js desktop application supporting daily museum operations and interactive visitor learning at Banyumas Wayang Museum, presented during a 2026 Ministry of Culture institutional visit.</li>
+                                </ul>
+                                <ul class="tags" aria-label="Technologies used at Bapak Pucung Studio">
+                                    <li>Laravel</li>
+                                    <li>Electron.js</li>
+                                    <li>IoT API Integration</li>
+                                    <li>Full-Stack Deployment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="statusbar">
+                    <span id="exp-status">PT Indonesian Cloud | Sep 2026 to Present</span>
+                    <span>2+ years professional experience</span>
+                </footer>
+            </article>
+        </section>
+
+        <section id="projects" class="section" hidden>
+            <article class="window window-projects" role="dialog" aria-labelledby="projects-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon icon-folder" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="projects-title">Projects: Key Systems &amp; Case Studies</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="proj-toolbar">
+                    <div class="proj-filters" role="group" aria-label="Filter projects by technology">
+                        <button type="button" class="filter-chip" data-proj-filter="all" aria-pressed="true">All (9)</button>
+                        <button type="button" class="filter-chip" data-proj-filter="laravel" aria-pressed="false">Laravel &amp; PHP</button>
+                        <button type="button" class="filter-chip" data-proj-filter="nextjs" aria-pressed="false">Next.js &amp; Web</button>
+                        <button type="button" class="filter-chip" data-proj-filter="cloud" aria-pressed="false">Go &amp; Cloud</button>
+                        <button type="button" class="filter-chip" data-proj-filter="ai" aria-pressed="false">AI &amp; Desktop</button>
+                    </div>
+                    <label class="proj-search-label">
+                        <span class="visually-hidden">Search projects</span>
+                        <input type="search" id="proj-search" placeholder="Search project, client, or stack..." autocomplete="off">
+                    </label>
+                </div>
+                <div class="window-body projects-body">
+                    <div class="project-grid" id="project-key-grid">
+                        <article class="project-card project-featured" data-stack="laravel cloud" data-search="sip-hapus polda samsat bapenda jasa raharja wajib pajak semarang laravel mysql docker rbac vehicle registration">
+                            <div class="project-top">
+                                <div>
+                                    <h3>SIP-Hapus: Interagency Vehicle Registration Deletion</h3>
+                                    <p class="project-client">Polda, Samsat, Bapenda, Jasa Raharja &amp; Wajib Pajak · Semarang, Central Java</p>
+                                </div>
+                                <span class="project-badge">30% faster processing</span>
+                            </div>
+                            <p>Digitized interagency vehicle registration deletion with online submission, multi-agency document management, and live status tracking. Reduced manual processing time by 30% while enforcing verification rules through role-based access control (RBAC) and province-level data segregation.</p>
+                            <ul class="tags" aria-label="SIP-Hapus tech stack">
+                                <li>Laravel</li>
+                                <li>MySQL</li>
+                                <li>Docker</li>
+                                <li>RBAC</li>
+                                <li>Province Data Segregation</li>
+                            </ul>
+                        </article>
+
+                        <article class="project-card" data-stack="nextjs" data-search="pt citra agung busana career recruitment management platform north jakarta next.js postgresql supabase applicant tracking">
+                            <div class="project-top">
+                                <h3>Career &amp; Recruitment Platform</h3>
+                                <span class="project-badge muted">Enterprise HR</span>
+                            </div>
+                            <p class="project-client">PT Citra Agung Busana · North Jakarta</p>
+                            <p>Centralized end-to-end recruitment administration so HR teams manage openings and selection stages in one place while candidates browse roles, submit applications, and track progress.</p>
+                            <ul class="tags" aria-label="Recruitment platform tech stack">
+                                <li>Next.js</li>
+                                <li>PostgreSQL</li>
+                                <li>Supabase</li>
+                            </ul>
+                        </article>
+
+                        <article class="project-card" data-stack="nextjs cloud" data-search="gymnastics learning system semarang next.js mysql go golang concurrent learning">
+                            <div class="project-top">
+                                <h3>Gymnastics Learning System</h3>
+                                <span class="project-badge muted">50-100 concurrent</span>
+                            </div>
+                            <p class="project-client">Academic Digital Learning · Semarang, Central Java</p>
+                            <p>Built a web-based gymnastics learning platform serving 50 to 100 concurrent active students, pairing a Next.js frontend with a low-overhead Go backend to keep response times steady under simultaneous classroom load.</p>
+                            <ul class="tags" aria-label="Gymnastics Learning System tech stack">
+                                <li>Go (Golang)</li>
+                                <li>Next.js</li>
+                                <li>MySQL</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <div class="shipped-archive" id="shipped-archive">
+                        <h3 class="archive-heading">Selected Studio &amp; Cloud Systems</h3>
+                        <div class="archive-table-wrap">
+                            <table class="archive-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">System</th>
+                                        <th scope="col">Organization / Sector</th>
+                                        <th scope="col">What Shipped</th>
+                                        <th scope="col">Stack</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-stack="ai cloud" data-search="farmer app pt indonesian cloud saas agricultural multimodal rag vector database openrouter">
+                                        <th scope="row">Farmer App</th>
+                                        <td>PT Indonesian Cloud</td>
+                                        <td>Agricultural land SaaS with text, image, and audio AI assistant grounded via RAG and vector search</td>
+                                        <td>RAG, Vector DB, OpenRouter</td>
+                                    </tr>
+                                    <tr data-stack="ai cloud" data-search="salep pt indonesian cloud sales intelligence spse procurement scraping llm guardrails">
+                                        <th scope="row">SALEP</th>
+                                        <td>PT Indonesian Cloud</td>
+                                        <td>Sales intelligence pipeline combining SPSE procurement scraping, LLM social analysis, and confidence-scored leads</td>
+                                        <td>SPSE Scraper, LLM Guardrails</td>
+                                    </tr>
+                                    <tr data-stack="cloud nextjs" data-search="openstack customer portal pt indonesian cloud vm server management">
+                                        <th scope="row">OpenStack Portal</th>
+                                        <td>PT Indonesian Cloud</td>
+                                        <td>Customer-facing cloud portal customized from OpenStack for virtual machine and server provisioning</td>
+                                        <td>OpenStack, Web Portal</td>
+                                    </tr>
+                                    <tr data-stack="laravel ai" data-search="mindfit vuriko studio health assessment bmr tdee bmi n8n llm laravel">
+                                        <th scope="row">MindFit</th>
+                                        <td>Vuriko Studio</td>
+                                        <td>Health diagnostic web app computing BMR, TDEE, and BMI with LLM nutrition and fitness guidance via n8n</td>
+                                        <td>Laravel, n8n, LLM API</td>
+                                    </tr>
+                                    <tr data-stack="nextjs" data-search="si-mliwis pantai mliwis vuriko studio correspondence archiving revenue analytics next.js supabase">
+                                        <th scope="row">SI-Mliwis</th>
+                                        <td>Pantai Mliwis Operations</td>
+                                        <td>Correspondence workflow, digital document archive, revenue reporting, and operational analytics</td>
+                                        <td>Next.js, Supabase</td>
+                                    </tr>
+                                    <tr data-stack="laravel" data-search="funbumi iot recycling unj jakarta bapak pucung studio waste deposit rewards laravel">
+                                        <th scope="row">Funbumi IoT Web</th>
+                                        <td>UNJ Jakarta Deployment</td>
+                                        <td>4-category waste sorting deposit workflow, resident tracking, and reward redemption integrated with IoT bins</td>
+                                        <td>Laravel, REST API, IoT</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="empty-state" id="proj-empty" hidden>
+                        <p id="proj-empty-msg">No projects match your current filter.</p>
+                        <button type="button" class="btn btn-small" id="proj-reset">Show all 9 systems</button>
+                    </div>
+                </div>
+                <footer class="statusbar">
+                    <span id="proj-status">Showing 9 of 9 featured &amp; studio systems (60+ total delivered)</span>
+                    <span>C:\Projects</span>
+                </footer>
+            </article>
+        </section>
+
+        <section id="education" class="section" hidden>
+            <article class="window window-education" role="dialog" aria-labelledby="education-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="education-title">education.exe: Academic &amp; Leadership Record</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="window-body edu-body">
+                    <div class="sys-tabs" role="tablist" aria-label="Academic and leadership sections">
+                        <button type="button" class="sys-tab" role="tab" id="tab-edu-academic" aria-selected="true" aria-controls="panel-edu-academic">Education &amp; Honors</button>
+                        <button type="button" class="sys-tab" role="tab" id="tab-edu-leadership" aria-selected="false" aria-controls="panel-edu-leadership" tabindex="-1">Leadership &amp; Community</button>
+                    </div>
+
+                    <div class="sys-panel" role="tabpanel" id="panel-edu-academic" aria-labelledby="tab-edu-academic" tabindex="0">
+                        <div class="edu-block">
+                            <div class="edu-header">
+                                <div>
+                                    <h3>Universitas Negeri Semarang (UNNES)</h3>
+                                    <p class="edu-degree">Bachelor's Degree in Informatics and Computer Engineering</p>
+                                </div>
+                                <div class="edu-meta">
+                                    <span class="edu-score">GPA 3.88 / 4.00</span>
+                                    <span>Aug 2022 - May 2026</span>
+                                </div>
+                            </div>
+                            <dl class="honors-ledger">
+                                <div>
+                                    <dt>PILMAPRES 2025</dt>
+                                    <dd>National Candidate for the Most Outstanding Student (PILMAPRES Awal Nasional) 2025, Indonesia.</dd>
+                                </div>
+                                <div>
+                                    <dt>National Competitions</dt>
+                                    <dd>Winner of 20+ awards across national-level academic and technology competitions.</dd>
+                                </div>
+                                <div>
+                                    <dt>Academic Distinction</dt>
+                                    <dd>Awarded The Best Academic Achievement Student at Universitas Negeri Semarang, 2025.</dd>
+                                </div>
+                                <div>
+                                    <dt>Published Research</dt>
+                                    <dd>Student Researcher with h-index 3, i10-index 1, and 22 citations on Google Scholar and ResearchGate.</dd>
+                                </div>
+                                <div>
+                                    <dt>Public Speaking</dt>
+                                    <dd>Invited speaker at 25+ local and national forums covering technology and personal development.</dd>
+                                </div>
+                                <div>
+                                    <dt>AIESEC 2024</dt>
+                                    <dd>Selected among the Best Delegates of AIESEC Future Leaders (Summer Batch) 2024, Semarang.</dd>
+                                </div>
+                            </dl>
+                        </div>
+
+                        <div class="edu-block edu-compact">
+                            <div class="edu-header">
+                                <div>
+                                    <h3>Bangkit Academy</h3>
+                                    <p class="edu-degree">Mobile Development Cohort (led by Google, Tokopedia, Gojek &amp; Traveloka)</p>
+                                </div>
+                                <div class="edu-meta">
+                                    <span class="edu-score">Grade 93.10 / 100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sys-panel" role="tabpanel" id="panel-edu-leadership" aria-labelledby="tab-edu-leadership" tabindex="0" hidden>
+                        <div class="leader-list">
+                            <article class="leader-item">
+                                <div class="edu-header">
+                                    <div>
+                                        <h3>Google Student Ambassador</h3>
+                                        <p class="edu-degree">Google Indonesia (UNNES Semarang)</p>
+                                    </div>
+                                    <span class="leader-date">Sep 2025 - Feb 2026</span>
+                                </div>
+                                <ul>
+                                    <li>Generated 500+ referral clicks and drove Gemini Pro sign-ups through targeted student campaigns.</li>
+                                    <li>Organized and ran 5 on-campus offline events demonstrating practical Gemini AI workflows across academic disciplines.</li>
+                                    <li>Produced technical and educational social content reaching 20,000+ impressions.</li>
+                                </ul>
+                            </article>
+
+                            <article class="leader-item">
+                                <div class="edu-header">
+                                    <div>
+                                        <h3>BSO MAWAPRES FT UNNES</h3>
+                                        <p class="edu-degree">President · Faculty of Engineering, Semarang</p>
+                                    </div>
+                                    <span class="leader-date">Dec 2024 - Dec 2025</span>
+                                </div>
+                                <ul>
+                                    <li>Directed faculty-wide mentorship and competition preparation across academic and engineering tracks.</li>
+                                    <li>Guided engineering students to win 100+ local and national awards throughout 2025.</li>
+                                </ul>
+                            </article>
+
+                            <article class="leader-item">
+                                <div class="edu-header">
+                                    <div>
+                                        <h3>HIMPROTE FT UNNES</h3>
+                                        <p class="edu-degree">Senior Staff, Department of Household Budgeting and Entrepreneurship</p>
+                                    </div>
+                                    <span class="leader-date">Jan 2023 - Jan 2025</span>
+                                </div>
+                                <ul>
+                                    <li>Led a 10-member entrepreneurship team generating IDR 30 million in revenue through online and offline sales.</li>
+                                    <li>Managed end-to-end vendor production and distribution of 700+ student apparel items.</li>
+                                </ul>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <footer class="statusbar">
+                    <span id="edu-status">Academic Record | GPA 3.88 / 4.00</span>
+                    <span>Semarang &amp; Jakarta</span>
+                </footer>
+            </article>
+        </section>
+
+        <section id="readme" class="section" hidden>
+            <article class="window window-notepad" role="dialog" aria-labelledby="readme-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon icon-text" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="readme-title">skills.txt: Technical Stack &amp; Profile</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="notepad-toolbar">
+                    <label class="skill-search-wrap">
+                        <span>Find skill:</span>
+                        <input type="search" id="skill-search" placeholder="e.g. Laravel, Go, Docker, RAG, Kotlin..." autocomplete="off">
+                    </label>
+                    <button type="button" class="btn btn-small" id="skill-clear" hidden>Clear</button>
+                </div>
+                <div class="window-body notepad-body">
+                    <div class="notepad-doc" id="skills-doc" tabindex="0">
+                        <div class="notepad-header">
+                            <p class="mono-title">BRIAN WIBOWO (APRIANSYAH WIBOWO)</p>
+                            <p class="mono-sub">Full-Stack Software Developer | South Jakarta, Jakarta | sultanapri86@gmail.com</p>
+                            <p class="mono-sub">GitHub: https://github.com/brianwibowo</p>
+                        </div>
+
+                        <div class="skill-groups" id="skill-groups">
+                            <section class="skill-group" data-skill-text="languages javascript typescript php sql kotlin python">
+                                <h3>[01] Languages</h3>
+                                <p>JavaScript, TypeScript, PHP, SQL, Kotlin, Python</p>
+                            </section>
+
+                            <section class="skill-group" data-skill-text="frameworks libraries laravel react.js next.js express.js angular react native vue.js tailwind css electron.js">
+                                <h3>[02] Frameworks &amp; Libraries</h3>
+                                <p>Laravel, React.js, Next.js, Express.js, Angular, React Native, Vue.js, Tailwind CSS, Electron.js</p>
+                            </section>
+
+                            <section class="skill-group" data-skill-text="backend databases infrastructure golang go laravel spring boot rest apis mysql postgresql firebase cloudflare vercel supabase docker linux apache kafka grafana vps cloudpanel ci/cd openstack">
+                                <h3>[03] Backend, Databases &amp; Infrastructure</h3>
+                                <p>Golang, Laravel, Spring Boot, REST APIs, MySQL, PostgreSQL, Firebase, Cloudflare, Vercel, Supabase, Docker, Linux, Apache Kafka, Grafana, VPS, CloudPanel, CI/CD, OpenStack</p>
+                            </section>
+
+                            <section class="skill-group" data-skill-text="version control dev tools git bitbucket github gitea postman vs code android studio clickup n8n">
+                                <h3>[04] Version Control &amp; Dev Tools</h3>
+                                <p>Git, Bitbucket, GitHub, Gitea, Postman, VS Code, Android Studio, ClickUp, n8n</p>
+                            </section>
+
+                            <section class="skill-group" data-skill-text="software engineering concepts oop mvc solid system design authentication authorization rbac sdlc agile scrum kanban waterfall">
+                                <h3>[05] Software Engineering Concepts</h3>
+                                <p>OOP, MVC, SOLID, System Design, Authentication &amp; Authorization, Role-Based Access Control (RBAC), SDLC, Agile, Scrum, Kanban, Waterfall</p>
+                            </section>
+
+                            <section class="skill-group" data-skill-text="machine learning ai pytorch tensorflow scikit-learn random forest xgboost svm knn">
+                                <h3>[06] Machine Learning &amp; Data Modeling</h3>
+                                <p>PyTorch, TensorFlow, scikit-learn, Random Forest, XGBoost, SVM, KNN</p>
+                            </section>
+
+                            <section class="skill-group" data-skill-text="generative ai llm applications retrieval-augmented generation rag vector databases openrouter api llm guardrails multimodal ai integration">
+                                <h3>[07] Generative AI &amp; LLM Applications</h3>
+                                <p>Retrieval-Augmented Generation (RAG), Vector Databases, OpenRouter API, LLM Guardrails, Multimodal AI Integration</p>
+                            </section>
+                        </div>
+
+                        <div class="empty-state" id="skill-empty" hidden>
+                            <p id="skill-empty-msg">No skill category matches that search term.</p>
+                            <button type="button" class="btn btn-small" id="skill-reset">Show all 7 categories</button>
+                        </div>
+                    </div>
+                </div>
+                <footer class="statusbar">
+                    <span id="skill-status">7 skill categories loaded</span>
+                    <span>UTF-8</span>
+                </footer>
+            </article>
+        </section>
+
+        <section id="contact" class="section">
+            <article class="window window-contact" role="dialog" aria-labelledby="contact-title">
+                <header class="titlebar">
+                    <span class="titlebar-icon icon-mail" aria-hidden="true"></span>
+                    <h2 class="titlebar-text" id="contact-title">New Message</h2>
+                    <div class="titlebar-buttons">
+                        <button type="button" class="tb-btn tb-min" data-win="minimize" aria-label="Minimize"></button><button type="button" class="tb-btn tb-max" data-win="maximize" aria-label="Maximize"></button><button type="button" class="tb-btn tb-close" data-win="close" aria-label="Close"></button>
+                    </div>
+                </header>
+                <div class="window-body">
+                    <p class="section-lede">Hiring for a software engineering role or planning a web, mobile, or cloud build? Send a message below or write directly to <strong>sultanapri86@gmail.com</strong>.</p>
+                    <form id="contact-form" class="contact-form" method="POST" novalidate>
+                        <div class="field field-static">
+                            <span>To:</span>
+                            <div class="static-value">Brian Wibowo &lt;sultanapri86@gmail.com&gt;</div>
+                        </div>
+                        <label class="field">
+                            <span>From:</span>
+                            <input type="text" name="name" autocomplete="name" maxlength="100" placeholder="Your name" required>
+                        </label>
+                        <label class="field">
+                            <span>Email:</span>
+                            <input type="email" name="email" autocomplete="email" maxlength="254" placeholder="you@company.com" required>
+                        </label>
+                        <label class="field">
+                            <span>Subject:</span>
+                            <input type="text" name="subject" maxlength="150" placeholder="Role or project inquiry" required>
+                        </label>
+                        <label class="field field-message">
+                            <span class="visually-hidden">Message</span>
+                            <textarea name="message" rows="6" maxlength="5000" placeholder="Tell me about the team, scope, or timeline..." required></textarea>
+                        </label>
+                        <div class="hp-field" aria-hidden="true">
+                            <label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="button" class="btn" id="copy-email-btn" data-email="sultanapri86@gmail.com">Copy Email Address</button>
+                            <a href="https://github.com/brianwibowo" target="_blank" rel="noopener noreferrer" class="btn">GitHub Profile</a>
+                        </div>
+                        <div class="form-status" id="form-status" role="status" aria-live="polite" hidden><p></p></div>
+                    </form>
+                </div>
+            </article>
+        </section>
+
+        <p class="copyright">&copy; <span id="year"></span> Brian Wibowo · South Jakarta, Indonesia</p>
+    </main>
+
+    <nav class="taskbar" aria-label="Main taskbar">
+        <div class="start-wrap">
+            <button class="start-btn" id="start-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="start-menu">
+                <span class="start-logo" aria-hidden="true"></span>start
+            </button>
+            <div class="start-menu" id="start-menu" hidden>
+                <div class="start-head">
+                    <span class="start-avatar" aria-hidden="true">BW</span>
+                    <div class="start-user-meta">
+                        <span>Brian Wibowo</span>
+                        <small>Full-Stack Developer</small>
+                    </div>
+                </div>
+                <ul class="start-list">
+                    <li><a href="#welcome">Welcome</a></li>
+                    <li><a href="#experience">Work History</a></li>
+                    <li><a href="#projects">Projects (60+ Shipped)</a></li>
+                    <li><a href="#education">Education &amp; Leadership</a></li>
+                    <li><a href="#readme">Technical Skills</a></li>
+                    <li><a href="#contact">New Message</a></li>
+                    <li class="sep" role="separator"></li>
+                    <li><a href="https://github.com/brianwibowo" target="_blank" rel="noopener noreferrer">GitHub (@brianwibowo)</a></li>
+                    <li><a href="mailto:sultanapri86@gmail.com">Email sultanapri86@gmail.com</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <ul class="task-buttons" id="task-buttons">
+            <li id="task-welcome" hidden><a href="#welcome">Welcome</a></li>
+            <li id="task-experience" hidden><a href="#experience">Work History</a></li>
+            <li id="task-projects" hidden><a href="#projects">Projects</a></li>
+            <li id="task-education" hidden><a href="#education">Education</a></li>
+            <li id="task-readme" hidden><a href="#readme">skills.txt</a></li>
+            <li id="task-contact" hidden><a href="#contact" data-task="contact">New Message</a></li>
+        </ul>
+
+        <div class="tray">
+            <button class="tray-btn sound-btn" id="sound-btn" type="button" aria-pressed="true" aria-label="System sounds on" title="System sounds: on">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/>
+                    <path class="sound-waves" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path class="sound-x" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="tray-wrap">
+                <button class="tray-btn" id="skin-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="skin-menu" aria-label="Change theme" title="Display Properties">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="2" y="3" width="20" height="14" rx="1.5" fill="currentColor" opacity="0.25"/>
+                        <rect x="2" y="3" width="20" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="8" cy="10" r="2.2" fill="#ff6ad5"/><circle cx="12" cy="10" r="2.2" fill="#a6ff4d"/><circle cx="16" cy="10" r="2.2" fill="#3d95ff"/>
+                        <path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="skin-menu" id="skin-menu" hidden>
+                    <div class="skin-head">Display Properties</div>
+                    <ul class="skin-list" id="skin-list"></ul>
+                </div>
+            </div>
+            <time class="clock" id="clock"></time>
+        </div>
+    </nav>
+
+    <script src="js/sound.js?v=20261124b"></script>
+    <script src="js/main.js?v=20261124b"></script>
+    <script src="js/contact.js?v=20261124b"></script>
+    <script src="js/droid.js?v=20261124b"></script>
+</body>
+</html>
