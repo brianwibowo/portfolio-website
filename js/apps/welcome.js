@@ -34,10 +34,10 @@ export const welcomeApp = {
                     </div>
                     <figure class="hero-portrait" id="hero-portrait">
                         <div class="pixel-screen">
-                            <img src="assets/images/portrait-pixel.png" width="320" height="384" alt="Retro pixel art portrait of Brian Wibowo" class="pixel-photo">
+                            <img src="assets/images/portrait-pixel.png?v=2" width="320" height="384" alt="Retro pixel art portrait of Brian Wibowo" class="pixel-photo">
                         </div>
                         <figcaption class="pixel-caption">
-                            <span>brian.bmp · 80x96</span>
+                            <span>brian.bmp · 160x192</span>
                             <button type="button" class="pixel-mode-btn" id="portrait-mode-btn" aria-pressed="false" title="Toggle retro LCD tint">LCD</button>
                         </figcaption>
                     </figure>
