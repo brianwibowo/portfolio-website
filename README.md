@@ -1,21 +1,55 @@
 # Brian Wibowo | Portfolio Website
 
-Personal portfolio for **Brian Wibowo (Apriansyah Wibowo)**, Full-Stack Developer based in South Jakarta, built as an interactive early-2000s desktop environment with plain HTML, CSS, and JavaScript. No frameworks, no build step, and ready for static hosting on Vercel or GitHub Pages.
+Personal portfolio for **Brian Wibowo (Apriansyah Wibowo)**, Full-Stack Developer based in South Jakarta, built as a modular early-2000s desktop environment using plain HTML, CSS, and native JavaScript ES Modules. Zero build step and ready for static hosting on Vercel or GitHub Pages.
 
-## Desktop Windows
+## Modular Architecture
 
-- **Welcome (`welcome.exe`):** executive summary, key delivery metrics, and direct shortcuts.
-- **Work History (`experience.exe`):** split-pane inspector covering full-stack engineering roles at **PT Indonesian Cloud**, **Vuriko Studio**, and **Bapak Pucung Studio**.
-- **Projects (`Projects`):** featured case study for **SIP-Hapus**, recruitment and learning systems, and a searchable archive of studio and cloud platforms with tech-stack filters.
-- **Education & Leadership (`education.exe`):** tabbed record for **Universitas Negeri Semarang (UNNES)** (GPA 3.88/4.00), **Bangkit Academy** (93.10/100), **Google Student Ambassador**, **BSO MAWAPRES FT UNNES**, and **HIMPROTE FT UNNES**.
-- **Technical Skills (`skills.txt`):** searchable stack reference spanning 7 engineering, cloud, and AI categories.
-- **New Message (`Contact`):** validated message composer with pre-filled `mailto:` fallback, one-click email copy (`sultanapri86@gmail.com`), and optional Formspree webhook support (`FORM_ENDPOINT` in `js/contact.js`).
+```
+├── index.html                  Slim shell (~100 lines)
+├── css/
+│   ├── base.css                6 WCAG-verified skin tokens, window chrome, buttons, scrollbars
+│   ├── desktop.css             Log-on screen, desktop shortcuts, taskbar, Start menu, Bit droid
+│   └── windows.css             Per-app window layouts and responsive reflows
+├── js/
+│   ├── app.js                  Entry point: mounts registered apps and boots core services
+│   ├── core/
+│   │   ├── sound.js            Web Audio startup chime, beeps, and mute toggle
+│   │   ├── skins.js            Display Properties skin switcher and adaptive SVG favicon
+│   │   ├── taskbar.js          Start menu, live clock, and draggable desktop icons
+│   │   ├── window-manager.js   Window stacking, drag, resize/pinch, Escape, and tab helper
+│   │   ├── logon.js            Log-on screen, ASCII wolf, and decrypting display name
+│   │   └── droid.js            Bit desktop robot
+│   └── apps/
+│       ├── index.js            Central app registry (APPS + EXTERNAL_LINKS)
+│       ├── welcome.js          Welcome hero window and ASCII aura
+│       ├── experience.js       Work History split-pane inspector
+│       ├── projects.js         Projects case studies, archive table, and live filter
+│       ├── education.js        Academic & Leadership tabbed System Properties dialog
+│       ├── skills.js           Searchable skills.txt stack document
+│       ├── contact.js          New Message composer (mailto + clipboard + optional Formspree)
+│       └── lover.js            lover.exe (404 Not Found dialog)
+└── assets/images/              Favicon and apple touch icon
+```
 
-## Theme & Accessibility Features
+## How to Add a New Feature / App
 
-- **Six switchable skins:** Night LCD (default), Olive Drab, Luna Blue, Silver Metal, Aero Glass, and Y2K Cyber via **Display Properties** in the system tray, all verified against WCAG AA contrast ratios.
-- **Keyboard & mobile support:** full keyboard navigation (`Tab`, arrow keys on tabs, `Escape` to dismiss menus/windows), resizable/draggable/maximizable windows on desktop, and responsive stacked layouts on phones and tablets.
-- **Desktop droid (`Bit`):** interactive jet-boot maintenance robot (`js/droid.js`) with Web Audio system chimes (`js/sound.js`) and `prefers-reduced-motion` support.
+1. Create a new module file in `js/apps/` (for example `js/apps/music.js`):
+   ```js
+   export const musicApp = {
+       id: 'music',
+       label: 'music.exe',
+       startLabel: 'Music Player',
+       taskLabel: 'music.exe',
+       icon: '<svg viewBox="0 0 48 48" aria-hidden="true">...</svg>',
+       render() {
+           return `<section id="music" class="section" hidden><article class="window" role="dialog" aria-labelledby="music-title">...</article></section>`;
+       },
+       init() {
+           // Bind click/input handlers here
+       },
+   };
+   ```
+2. Import and add it to `APPS` inside `js/apps/index.js`. Desktop icon, Start menu entry, taskbar button, window drag/resize/minimize/maximize/close, and `Escape` dismissal work automatically.
 
 ## Running Locally
 
@@ -26,19 +60,3 @@ npx serve .
 ```
 
 Open `http://localhost:8000` (or `http://localhost:3000` with `npx serve`).
-
-## Project Structure
-
-```
-├── assets/
-│   └── images/            favicon and apple touch icon
-├── css/
-│   └── style.css          skin tokens, window layouts, responsive rules
-├── js/
-│   ├── main.js            log-on screen, skins, windows, tabs, filters
-│   ├── sound.js           Web Audio startup chime and mute toggle
-│   ├── droid.js           Bit desktop robot
-│   └── contact.js         form validation, clipboard copy, mailto/Formspree
-├── index.html
-└── README.md
-```

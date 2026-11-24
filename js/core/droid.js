@@ -1,19 +1,13 @@
-// Desktop pet: "Bit", a small original maintenance droid with jet boots. It
-// hovers along the top of the taskbar, stops to look around, sometimes jets
-// up onto a window's title bar (and rides along if the window is dragged),
-// walks off a window's edge and jets back down, beeps and hops when
-// clicked, can be picked up and dropped, and dozes off when the visitor goes
-// idle. Its colours come from the current skin.
-document.addEventListener('DOMContentLoaded', () => {
-    // Measured, since iPhones add the home-bar inset to the taskbar.
-    const taskbarH = () => document.querySelector('.taskbar')?.offsetHeight || 42;
+// Desktop pet: "Bit", a maintenance droid with jet boots that wanders the taskbar and window titlebars.
+export function initDroid() {
+    const taskbarH = () => document.querySelector('.taskbar')?.offsetHeight || 44;
     const W = 46;
     const H = 52;
-    const GRAVITY = 1500;      // px/s²
-    const JET_FALL = 0.55;     // jets cut gravity to this fraction while falling
-    const MAX_FALL = 520;      // px/s: terminal speed with the jets on
-    const SPEED = 55;          // hovering speed, px/s
-    const SLEEP_AFTER = 30000; // ms without activity
+    const GRAVITY = 1500;
+    const JET_FALL = 0.55;
+    const MAX_FALL = 520;
+    const SPEED = 55;
+    const SLEEP_AFTER = 30000;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const el = document.createElement('div');
@@ -37,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle class="d-light" cx="26" cy="30" r="1.3"/>
                 <circle class="d-light d-light-2" cx="26" cy="34" r="1.3"/>
             </g>
+            <g>
                 <rect class="d-leg" x="12" y="37" width="3" height="2.5"/>
                 <rect class="d-leg" x="25" y="37" width="3" height="2.5"/>
                 <rect class="d-boot" x="9.5" y="39" width="8" height="4" rx="1.6"/>
@@ -54,49 +49,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const bob = el.querySelector('.d-bob');
     const bubble = el.querySelector('.droid-bubble');
 
-    // State
+    const ground = () => window.innerHeight - taskbarH() - H + 4;
     let x = -W;
     let y = ground();
     let vy = 0;
-    let facing = 1;          // 1 = right, -1 = left
-    let thrust = 0;          // 0..1, how hard the jets are firing (drawn as flame size)
-    let lift = 0;            // px the body hovers above the surface
-    let surface = null;      // null = taskbar, otherwise the window element it stands on
-    let surfaceOffset = 0;   // x relative to the left edge of that window
-    let mode = 'enter';      // enter | roll | look | hop | fall | carried | sleep
-    let targetX = 140;       // where it's heading on the taskbar (screen x)
-    let targetOff = 0;       // where it's heading on a window (offset from its left edge)
-    let until = 0;           // when the current pause ends
+    let facing = 1;
+    let thrust = 0;
+    let lift = 0;
+    let surface = null;
+    let surfaceOffset = 0;
+    let mode = 'enter';
+    let targetX = 140;
+    let targetOff = 0;
+    let until = 0;
     let hop = null;
     let drag = null;
     let lastActivity = performance.now();
     let bubbleTimer = 0;
 
-    function ground() {
-        return window.innerHeight - taskbarH() - H + 4; // boots rest on the taskbar edge
-    }
+    const visibleWindows = () => [...document.querySelectorAll('.window')].filter((w) => {
+        if (w.classList.contains('trail') || w.closest('[hidden]') || w.hidden) return false;
+        const r = w.getBoundingClientRect();
+        return r.width > 120 && r.top > H + 10 && r.top < window.innerHeight - taskbarH() - 60;
+    });
 
-    function visibleWindows() {
-        return [...document.querySelectorAll('.window')].filter((w) => {
-            if (w.classList.contains('trail') || w.closest('[hidden]') || w.hidden) return false;
-            const r = w.getBoundingClientRect();
-            return r.width > 120 && r.top > H + 10 && r.top < window.innerHeight - taskbarH() - 60;
-        });
-    }
-
-    // Match window z-index so Bit stands above its window and behind windows in front.
     const GROUND_Z = 49;
     const CARRIED_Z = 1000;
     let z = GROUND_Z;
 
-    function layerZ(win) {
+    const layerZ = (win) => {
         const layer = window.desktopLayers?.layerOf(win) || win;
         return Number(getComputedStyle(layer).zIndex) || GROUND_Z + 1;
-    }
+    };
 
-    // The window actually visible at a point (so Bit never lands on a part of
-    // a title bar that another window is covering).
-    function topWindowAt(px, py) {
+    const topWindowAt = (px, py) => {
         for (const node of document.elementsFromPoint(px, py)) {
             if (el.contains(node)) continue;
             const w = node.closest('.window');
@@ -104,30 +90,34 @@ document.addEventListener('DOMContentLoaded', () => {
             if (node.closest('.taskbar')) return null;
         }
         return null;
-    }
+    };
 
-    function say(text, ms = 1600) {
+    const say = (text, ms = 1600) => {
         bubble.textContent = text;
         bubble.classList.add('show');
         clearTimeout(bubbleTimer);
         bubbleTimer = setTimeout(() => bubble.classList.remove('show'), ms);
-    }
+    };
 
-    function lookAround(ms) {
+    const lookAround = (ms) => {
         mode = 'look';
         until = performance.now() + ms;
+    };
+
+    function startHop(tx, ty, toWindow, rect) {
+        hop = { fromX: x, fromY: y, toX: tx, toY: ty, t: 0, dur: 0.7, to: toWindow, rect };
+        facing = tx >= x ? 1 : -1;
+        mode = 'hop';
+        window.systemSound?.beep(1200, 1);
     }
 
     function pickNext() {
-        const now = performance.now();
         const r = Math.random();
         const wins = visibleWindows();
         if (r < 0.22 && wins.length && !reduceMotion && window.innerWidth > 520) {
-            // Hop up onto (or across to) a window's title bar.
             const w = wins[Math.floor(Math.random() * wins.length)];
             if (w !== surface) {
                 const rect = w.getBoundingClientRect();
-                // Pick a spot on the title bar that isn't hidden behind another window.
                 for (let tries = 0; tries < 6; tries++) {
                     const tx = rect.left + 20 + Math.random() * Math.max(10, rect.width - W - 40);
                     if (topWindowAt(tx + W / 2, rect.top + 4) === w) {
@@ -142,23 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         mode = 'roll';
-        void now;
         if (surface) {
-            // On a window: wander along its title bar, measured from its left
-            // edge so it moves with the window. Sometimes walk right off an
-            // edge and jet back down.
             const width = surface.getBoundingClientRect().width;
-            if (Math.random() < 0.3) {
-                targetOff = Math.random() < 0.5 ? -W : width + 4;
-            } else {
-                targetOff = 4 + Math.random() * Math.max(1, width - W - 8);
-            }
+            targetOff = Math.random() < 0.3
+                ? (Math.random() < 0.5 ? -W : width + 4)
+                : 4 + Math.random() * Math.max(1, width - W - 8);
         } else {
             targetX = 8 + Math.random() * Math.max(1, window.innerWidth - W - 16);
         }
     }
 
-    // Step off the window it's standing on.
     function dropOff() {
         surface = null;
         vy = 0;
@@ -166,14 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
         say(Math.random() < 0.5 ? 'whoosh!' : 'wheee!', 900);
     }
 
-    function startHop(tx, ty, toWindow, rect) {
-        hop = { fromX: x, fromY: y, toX: tx, toY: ty, t: 0, dur: 0.7, to: toWindow, rect };
-        facing = tx >= x ? 1 : -1;
-        mode = 'hop';
-        window.systemSound?.beep(1200, 1);
-    }
-
-    // Land on a window title bar if falling through its top edge, else the taskbar.
     function landingFor(prevBottom, newBottom, cx) {
         for (const w of visibleWindows()) {
             const r = w.getBoundingClientRect();
@@ -194,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lookAround(700);
     }
 
-    // Physics and animation frame loop.
     let last = performance.now();
     function step(now) {
         requestAnimationFrame(step);
@@ -202,8 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         last = now;
         if (document.hidden) return;
 
-        // Riding a window: always move with it, and drop off if it closes or
-        // if Bit is past either edge (the window moved, shrank or Bit walked off).
         if (surface && mode !== 'hop' && mode !== 'carried') {
             const r = surface.getBoundingClientRect();
             if (surface.hidden || surface.closest('[hidden]') || r.width === 0) {
@@ -218,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
             y = ground();
         }
 
-        // Fall asleep when the visitor has been idle for a while.
         if (mode !== 'sleep' && mode !== 'carried' && mode !== 'fall' && mode !== 'hop' && now - lastActivity > SLEEP_AFTER) {
             mode = 'sleep';
             el.classList.add('asleep');
@@ -252,11 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'hop': {
                 hop.t += dt / hop.dur;
                 const t = Math.min(1, hop.t);
-                // keep aiming at the window even if it moved mid-hop
-                if (hop.to) {
-                    const r = hop.to.getBoundingClientRect();
-                    hop.toY = r.top - H + 3;
-                }
+                if (hop.to) hop.toY = hop.to.getBoundingClientRect().top - H + 3;
                 x = hop.fromX + (hop.toX - hop.fromX) * t;
                 y = hop.fromY + (hop.toY - hop.fromY) * t - Math.sin(t * Math.PI) * 90;
                 if (t >= 1) {
@@ -267,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             }
             case 'fall': {
-                // Jets fire on the way down: a controlled descent, not a drop.
                 const prevBottom = y + H;
                 vy = Math.min(MAX_FALL, vy + GRAVITY * JET_FALL * dt);
                 y += vy * dt;
@@ -279,11 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
 
-        // Keep on screen horizontally.
         x = Math.max(-W, Math.min(window.innerWidth - W + 2, x));
-
-        // Jets: how hard they fire depends on what Bit is doing. While moving
-        // it hovers a few pixels above the surface; standing still, it lands.
         const want = { hop: 1, fall: 0.85, carried: 0.35, roll: 0.55, enter: 0.55 }[mode] ?? 0;
         thrust += ((moving || mode !== 'roll' ? want : 0) - thrust) * Math.min(1, dt * 10);
         const hoverTarget = moving ? 4 : 0;
@@ -293,32 +255,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         el.style.transform = `translate(${x}px, ${y - lift}px)`;
         svg.style.transform = `scaleX(${facing})`;
-        // Layer: follow the window it's on (or heading to); keep the current
-        // layer while falling, so it doesn't jump in front of windows mid-air.
+
         if (mode === 'carried') z = CARRIED_Z;
         else if (mode === 'hop') z = hop?.to ? layerZ(hop.to) : GROUND_Z;
         else if (mode !== 'fall') z = surface ? layerZ(surface) : GROUND_Z;
-        else if (z === CARRIED_Z) z = GROUND_Z; // just dropped: fall at desktop level
+        else if (z === CARRIED_Z) z = GROUND_Z;
         el.style.zIndex = String(z);
-
-        el.dataset.state = mode; // handy for styling and debugging
-        el.dataset.on = surface ? (surface.closest('section')?.id || 'window') : 'taskbar';
     }
 
-    // Periodic eye glance when awake.
-    let eyeX = 0;
-    function glance() {
+    setInterval(() => {
         if (mode === 'sleep') return;
-        eyeX = (Math.random() * 2 - 1) * 4.5;
-        eye.style.transform = `translateX(${eyeX}px)`;
-    }
-    setInterval(glance, 1800);
+        eye.style.transform = `translateX(${(Math.random() * 2 - 1) * 4.5}px)`;
+    }, 1800);
 
-    // Click to chirp/hop; drag to carry and drop.
     el.addEventListener('pointerdown', (e) => {
         if (e.button !== 0) return;
         e.preventDefault();
-        try { el.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
+        try { el.setPointerCapture(e.pointerId); } catch (err) { /* pointer gone */ }
         drag = { sx: e.clientX, sy: e.clientY, ox: e.clientX - x, oy: e.clientY - y, moved: false };
     });
 
@@ -335,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.systemSound?.beep(1500, 2);
         }
         x = e.clientX - drag.ox;
-        y = Math.max(0, Math.min(ground(), e.clientY - drag.oy)); // keep it on screen
+        y = Math.max(0, Math.min(ground(), e.clientY - drag.oy));
         el.style.transform = `translate(${x}px, ${y}px)`;
     });
 
@@ -349,7 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mode = 'fall';
             return;
         }
-        // A click: wake up, beep, hop on the spot.
         el.classList.remove('asleep');
         el.classList.add('happy');
         setTimeout(() => el.classList.remove('happy'), 900);
@@ -367,7 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('pointerup', release);
     el.addEventListener('pointercancel', release);
 
-    // Wake up on user activity.
     const activity = () => {
         lastActivity = performance.now();
         if (mode === 'sleep') {
@@ -378,11 +329,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     ['mousemove', 'keydown', 'pointerdown', 'wheel', 'touchstart'].forEach((t) => document.addEventListener(t, activity, { passive: true }));
 
-    // When someone shakes Welcome until it stops responding, Bit notices.
     document.addEventListener('welcomepanic', () => {
         el.classList.remove('asleep');
         if (mode === 'sleep') lookAround(800);
-        say('uh oh…', 1800);
+        say('uh oh...', 1800);
         window.systemSound?.beep(420, 4);
     });
 
@@ -396,20 +346,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!surface && mode !== 'carried') y = ground();
     });
 
-    // Roll in from the left shortly after the desktop appears.
     if (reduceMotion) {
         x = 120;
         mode = 'look';
         until = Infinity;
     } else {
-        until = Infinity; // wait for the roll-in below
+        until = Infinity;
         mode = 'look';
         x = -W;
-        // Wait for the visitor to log on (if there's a log-on screen), then roll in.
         const rollIn = () => setTimeout(() => { targetX = 110 + Math.random() * 80; mode = 'enter'; }, 1500);
         const logon = document.getElementById('logon');
         if (logon && !logon.hidden) document.addEventListener('logon', rollIn, { once: true });
         else rollIn();
     }
     requestAnimationFrame(step);
-});
+}
